@@ -1,4 +1,4 @@
-# Learning JavaScript Design Patters Notes and Code
+# Learning JavaScript Design Patterns - Notes and Code
 This repository reproduces the code examples found in 'Learning JavaScript Design Patterns' by Addy Osmani. The point is to strengthen my own muscle memory by reproducing each example by hand (instead of just reading) and pay more attention to the code examples in the book. 
 
 ## Book Details
