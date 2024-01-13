@@ -144,7 +144,57 @@ An example of using Modules in modern Libraries is a React Component.
 
 Separating a component into its own file essentially creates a module.
 
-### The Revealing Pattern
+### The Revealing Module Pattern
+
+[Revealing Module](./chapter-7/module_revealing.html)
+Okay... I get it by looking at Christian Heilmann's article.
+Which is recommended in the book. Its examples are very good
+at demonstrating how it is different to other styles of the module pattern
+https://christianheilmann.com/2007/08/22/again-with-the-module-pattern-reveal-something-to-the-world/
+
+It differs to the Module Pattern, in that you don't declare
+a private member first, then attach the desired methods via object notation.
+
+```js
+var pub = {};
+pub.publicVar = 2;
+```
+
+You declare all members of a module privately and then create a desirable public schema you want to export by referencing the private members in the exported object.
+
+> "...you simply define all your functions and variables in the private scope and return an anonymous object at the end of the module with pointers to the private variables and functions you want to reveal as public" - [Again with the Module Pattern – reveal something to the world](https://christianheilmann.com/2007/08/22/again-with-the-module-pattern-reveal-something-to-the-world/)
+
+Example (from book):
+
+```js
+let privateCounter = 0;
+const privateFunction = () => {
+  privateCounter++;
+};
+
+const publicFunction = () => {
+  publicIncrement();
+};
+
+const publicIncrement = () => {
+  privateFunction();
+};
+
+const publicGetCount = () => privateCounter;
+
+// Reveal public pointers to private functions and properties
+const myRevealingModule = {
+  start: publicFunction,
+  increment: publicIncrement,
+  count: publicGetCount,
+};
+
+export default myRevealingModule;
+
+// Usage
+// import myRevealingModule from './myRevealingModule'
+// myRevalingModule.start()
+```
 
 ### The Singleton Pattern
 
