@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Counter</title>
+  </head>
+  <body>
+    <!-- https://github.com/addyosmani/learning-jsdp/blob/5a17e1a2dbc8a74475bc24b0baef1899ab43168b/ch07/test_module.html -->
+    <h1>Interactive Counter Example</h1>
+    <p>Counter <span id="counter">0</span></p>
+    <button id="increment-button">Increment</button>
+    <button id="reset-button">Reset</button>
+
+    <script type="module">
+      import testModule from "./modules/testModule.mjs";
+      const counterElement = document.getElementById("counter");
+      const incrementButton = document.getElementById("increment-button");
+      const resetButton = document.getElementById("reset-button");
+      incrementButton.addEventListener("click", () => {
+        testModule.incrementCounter();
+        counterElement.textContent = testModule.getCounter();
+      });
+
+      resetButton.addEventListener("click", () => {
+        testModule.resetCounter();
+        counterElement.textContent = testModule.getCounter();
+      });
+    </script>
+  </body>
+</html>

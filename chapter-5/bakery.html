@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bakery Example</title>
+  </head>
+  <body>
+    <h1>Welcome to the Bakery!</h1>
+    <p>
+      check your browser's console to see the result of the cakeFactory
+      functions.
+    </p>
+    <!-- Browsers will not allow you to run this code without an http server -->
+    <!-- Try running it without the http server, you will come across the following error -->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp -->
+    <!-- You can download an extension, or use something like https://www.npmjs.com/package/http-server  -->
+    <!-- npx http-server <chapter directory> -->
+    <script type="module">
+      import "./modules/bakery.mjs";
+    </script>
+    <!-- browsers that don't support modules can use standard JS scripts as fallbacks -->
+    <script nomodule src="./fallback.js"></script>
+  </body>
+</html>

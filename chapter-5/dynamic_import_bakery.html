@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Module Import Bakery Example</title>
+  </head>
+  <body>
+    <h1>Welcome to the Dynamic Import Bakery!</h1>
+    <p>
+      check your browser's console to see the result of the cakeFactory
+      functions.
+    </p>
+    <form id="cakeForm">
+      <button type="submit">Create Cakes</button>
+    </form>
+    <!-- Browsers will not allow you to run this code without a http server -->
+    <!-- Try running it without the http server, you will come across the following error -->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp -->
+    <!-- You can download an extension, or use something like https://www.npmjs.com/package/http-server  -->
+    <!--  -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("cakeForm");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          import("./modules/cakeFactory.mjs")
+            .then((module) => {
+              module.default.oven.makeCupcake("sprinkles");
+              module.default.oven.makeMuffin("large");
+            })
+            .catch((error) => {
+              console.error("error importing module:", error);
+            });
+        });
+      });
+    </script>
+    <!-- browsers that don't support modules can use standard JS scripts as fallbacks -->
+    <script nomodule src="./fallback.js"></script>
+  </body>
+</html>

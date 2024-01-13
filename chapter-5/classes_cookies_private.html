@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Cookie Example 🍪</title>
+  </head>
+  <body>
+    <h1>Interactive Cookie Example</h1>
+    <form id="cookie-form">
+      <label for="flavour">Enter your favorite cookie flavour:</label>
+      <input type="text" id="flavour" name="flavour" required />
+      <button type="submit">Show Title</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+      class Cookie {
+        constructor(flavour) {
+          this.flavour = flavour;
+        }
+        showTitle() {
+          console.log(`The flavour of this cookie is ${this.flavour}`);
+        }
+      }
+
+      class FavouriteCookie extends Cookie {
+        #secretMessage() {
+          return `The secret ingredient is love.`;
+        }
+        showTitle() {
+          // calling super
+          // useful for implementing self-inheritance pattern
+          console.log(`${this.flavour} is the title`);
+          console.log("secret message:", this.secretMessage());
+          super.showTitle();
+        }
+      }
+
+      const form = document.getElementById("cookie-form");
+      const output = document.getElementById("output");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const flavour = document.getElementById("flavour").value;
+        const myCookie = new FavouriteCookie(flavour);
+        myCookie.showTitle();
+        output.innerHTML = `
+					<p>The flavour of this cookie is ${flavour}.</p>
+					<p>${flavour} is amazing</p>
+					<p>${myCookie.secretMessage()} here is a secret message</p>
+				`;
+      });
+    </script>
+  </body>
+</html>

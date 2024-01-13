@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive HTML Example with Namespace - WeakMap</title>
+  </head>
+  <body>
+    <h1>Interactive HTML Example with Namespace - WeakMap</h1>
+    <input type="text" id="input-bar" placeholder="Enter a value" />
+    <button id="call-public-function">Call public function</button>
+    <script>
+      const myPrivateVar = new WeakMap();
+      const myPrivateMethod = new WeakMap();
+
+      class MyNamespace {
+        constructor() {
+          myPrivateVar.set(this, 0);
+          myPrivateMethod.set(this, (foo) => console.log(foo));
+          this.myPublicVar = "foo";
+        }
+        myPublicFunction(bar) {
+          let privateVar = myPrivateVar.get(this);
+          const privateMethod = myPrivateMethod.get(this);
+          privateVar++;
+          myPrivateVar.set(this, privateVar);
+          privateMethod(bar);
+        }
+      }
+
+      const myNamespaceInstance = new MyNamespace();
+
+      // UI Elements
+      const inputBar = document.getElementById("input-bar");
+      const callPublicFunctionButton = document.getElementById(
+        "call-public-function"
+      );
+
+      callPublicFunctionButton.addEventListener("click", () => {
+        myNamespaceInstance.myPublicFunction(inputBar.value);
+      });
+    </script>
+  </body>
+</html>
